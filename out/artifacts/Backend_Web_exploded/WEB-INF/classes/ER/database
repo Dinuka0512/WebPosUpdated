@@ -1,0 +1,37 @@
+CREATE DATABASE pos;
+USE pos;
+
+CREATE TABLE customer(
+	custId VARCHAR(255) PRIMARY KEY,
+	fName VARCHAR(255),
+	lName VARCHAR(255),
+	email VARCHAR(255),
+	contact  VARCHAR(255)
+);
+
+CREATE TABLE item(
+	itemId VARCHAR(255) PRIMARY KEY,
+	name VARCHAR(255),
+	qty int,
+	price DECIMAL(10,2)
+);
+
+CREATE TABLE orderDetail(
+	odId VARCHAR(255) PRIMARY KEY,
+	itemId VARCHAR(255),
+	FOREIGN KEY (itemId) REFERENCES item(itemId) ON DELETE CASCADE ON UPDATE CASCADE,	qty int
+);
+
+CREATE TABLE orders(
+	orderId VARCHAR(255) PRIMARY KEY,
+	odId VARCHAR(255),
+	FOREIGN KEY (odId) REFERENCES orderDetail(odId) ON DELETE CASCADE ON UPDATE CASCADE,
+	custId VARCHAR(255),
+	FOREIGN KEY (custId) REFERENCES customer(custId) ON DELETE CASCADE ON UPDATE CASCADE,
+	DATE date
+);
+
+DESC customer;
+DESC item;
+DESC orders;
+DESC orderDetail;
